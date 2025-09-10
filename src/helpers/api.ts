@@ -44,6 +44,9 @@ export const fetchLeagueData = async (leagueId, setTeams, setMatchups) => {
   } catch (error) {
     console.error('Error fetching league data:', error);
   }
+
+  setTeams(mockTeamData);
+  setMatchups(mockMatchupData);
 };
 
 const getTeamDataForResponse = (teams) => {
