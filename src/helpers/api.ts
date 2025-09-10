@@ -29,15 +29,51 @@ const mockMatchupData = [
 ];
 
 export const fetchLeagueData = async (leagueId, setTeams, setMatchups) => {
-//   try {
-//     const response = await fetch(`https://api.example.com/leagues/${leagueId}`);
-//     const data = await response.json();
-//     setTeams(data.teams);
-//     setMatchups(data.matchups);
-//   } catch (error) {
-//     console.error('Error fetching league data:', error);
-//   }
-
-    setTeams(mockTeamData);
-    setMatchups(mockMatchupData);
+  try {
+    const currentYear = new Date().getFullYear();
+    const response = await fetch(`https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/${currentYear}/segments/0/leagues/${leagueId}?view=mBoxscore&view=mTeam`, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Cookie': 'SWID={BA30DB82-F936-47A5-A2F3-30C6586F8FEB}; espn_s2={AECGbSje8sUnWLLI5FXPqKBuqI5H4MdB0rij1uAy3fGdbc5O07dIcYbExgGw%2FbOF5BFSJMY3dk47ghOjseeDuKWVFEVQDKJl%2Fkbw6iGFd2d1Gdv%2F6IpjybG6X2x5bGbhjPKg9PnvoKgiwf6JvEr2%2FkL%2FCOckvcxmq2f1BzSUi7Z%2F3sesFgPBvfv4aBImfMlnYj0Z2x0G1wuyCGJ0ETByrGOCt1jfqQ75vc%2FC0O%2Bb3OYXuLLpw06xv9nQs9f%2FjEZl%2Bdmq4PjRaqPyaeNrTJ0CRIEKBvD05X2RlP%2B3co%2Bw9Fuobw%3D%3D}'
+      }
+    });
+    const data = await response.json();
+    setTeams(getTeamDataForResponse(data.teams));
+    setMatchups(getMatchupDataForResponse(data.schedule));
+  } catch (error) {
+    console.error('Error fetching league data:', error);
+  }
 };
+
+const getTeamDataForResponse = (teams) => {
+  const teamData = teams.map((team) => ({
+    id: team.id,
+    name: team.name,
+    totalPoints: team.points,
+    wins: team.record.wins,
+    losses: team.record.overall.losses,
+    ties: team.record.overall.ties,
+  }));
+
+  return teamData;
+};
+
+const getMatchupDataForResponse = (schedule) => {
+  const matchupData = schedule.map((matchup) => ({
+    week: matchup.matchupPeriodId,
+    homeId: matchup.home.teamId,
+    awayId: matchup.away.teamId,
+    homeScore: matchup.home.totalPoints,
+    awayScore: matchup.away.totalPoints,
+    winnerId: matchup.home.totalPoints > matchup.away.totalPoints ? matchup.home.teamId : (matchup.home.totalPoints < matchup.away.totalPoints ? matchup.away.teamId : null),
+  }));
+
+  return matchupData;
+};
+
+/*
+curl -X GET "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/2025/segments/0/leagues/1085647814?view=mBoxscore&view=mTeam" \
+   -H "Accept: application/json" \
+   -H "Cookie: SWID={BA30DB82-F936-47A5-A2F3-30C6586F8FEB}; espn_s2={AECGbSje8sUnWLLI5FXPqKBuqI5H4MdB0rij1uAy3fGdbc5O07dIcYbExgGw%2FbOF5BFSJMY3dk47ghOjseeDuKWVFEVQDKJl%2Fkbw6iGFd2d1Gdv%2F6IpjybG6X2x5bGbhjPKg9PnvoKgiwf6JvEr2%2FkL%2FCOckvcxmq2f1BzSUi7Z%2F3sesFgPBvfv4aBImfMlnYj0Z2x0G1wuyCGJ0ETByrGOCt1jfqQ75vc%2FC0O%2Bb3OYXuLLpw06xv9nQs9f%2FjEZl%2Bdmq4PjRaqPyaeNrTJ0CRIEKBvD05X2RlP%2B3co%2Bw9Fuobw%3D%3D}"
+*/
