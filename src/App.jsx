@@ -27,16 +27,16 @@ function App() {
 		const awayTeam = updatedTeams.find(team => team.id === matchup.awayId);
 
 		if (homeTeam && awayTeam) {
-		homeTeam.totalPoints += matchup.homeScore;
-		awayTeam.totalPoints += matchup.awayScore;
+			homeTeam.totalPoints += matchup.homeScore;
+			awayTeam.totalPoints += matchup.awayScore;
 
-		if (matchup.winnerId === homeTeam.id) {
-			homeTeam.wins += 1;
-			awayTeam.losses += 1;
-		} else if (matchup.winnerId === awayTeam.id) {
-			awayTeam.wins += 1;
-			homeTeam.losses += 1;
-		}
+			if (matchup.winnerId === homeTeam.id) {
+				homeTeam.wins += 1;
+				awayTeam.losses += 1;
+			} else if (matchup.winnerId === awayTeam.id) {
+				awayTeam.wins += 1;
+				homeTeam.losses += 1;
+			}
 		}
 	});
 	}
@@ -93,8 +93,8 @@ function App() {
 	};
 
 	const onSubmit = () => {
-	setLeagueId(document.getElementById('input-league-id').value)
-	fetchLeagueData(leagueId, setTeams, setMatchups);
+		setLeagueId(document.getElementById('input-league-id').value)
+		fetchLeagueData(leagueId, setTeams, setMatchups);
 	}
 
 	return (
@@ -111,10 +111,10 @@ function App() {
 		<p>League ID: {leagueId}</p>
 
 		{teams && matchups && (
-			<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-			<Matchups currentWeek={1} matchups={matchups} setMatchups={setMatchups} teams={teams} updateTeamRecords={updateTeamRecords} rankTeams={rankTeams} />
-			<div style={{ width: '20px' }}></div>
-			<Standings rankedTeams={rankedTeams} updateTeamRecords={updateTeamRecords} rankTeams={rankTeams} />
+			<div className='matchups-standings-container'>
+				<Matchups currentWeek={1} matchups={matchups} setMatchups={setMatchups} teams={teams} updateTeamRecords={updateTeamRecords} rankTeams={rankTeams} />
+				<div style={{ width: '20px' }}></div>
+				<Standings rankedTeams={rankedTeams} updateTeamRecords={updateTeamRecords} rankTeams={rankTeams} />
 			</div>
 		)}
 		</div>
