@@ -1,0 +1,47 @@
+name: ESPN API POC
+
+on:
+  workflow_dispatch: # manual trigger
+
+jobs:
+  poc:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Call ESPN API
+        run: |
+          node <<'EOF'
+          const SWID = process.env.ESPN_SWID;
+          const ESPN_S2 = process.env.ESPN_S2;
+
+          const url = "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/2025/segments/0/leagues/1085647814?view=mBoxscore&view=mTeam";
+
+          const headers = {
+            "Accept": "application/json",
+            "Cookie": `SWID=${SWID}; espn_s2=${ESPN_S2}`
+          };
+
+          (async () => {
+            const res = await fetch(url, { headers });
+            console.log("Status:", res.status, res.statusText);
+
+            if (!res.ok) {
+              throw new Error("Unauthorized or failed request");
+            }
+
+            const data = await res.json();
+            console.log("Sample keys in response:", Object.keys(data));
+            console.log("Number of teams:", data.teams?.length);
+          })().catch((err) => {
+            console.error(err);
+            process.exit(1);
+          });
+          EOF
+        env:
+          ESPN_SWID: ${{ secrets.ESPN_SWID }}
+          ESPN_S2: ${{ secrets.ESPN_S2 }}
