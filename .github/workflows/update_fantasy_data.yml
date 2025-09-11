@@ -1,94 +1,36 @@
 name: Update Fantasy Data
 
 on:
-  workflow_dispatch: # manual trigger
   schedule:
-    - cron: "0 * * * *" # runs every hour, adjust as needed
+    - cron: "0 6 * * 2" # 6:00 AM every Tuesday (UTC)
+  workflow_dispatch: # still allow manual runs
 
 jobs:
-  update-data:
+  fetch:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
         with:
-          node-version: 18
+            token: ${{ secrets.WORKFLOW_TOKEN }}
 
-      - name: Install dependencies
-        run: npm install node-fetch@2
-
-      - name: Fetch ESPN data and generate JSON
+      - name: Call ESPN API and save response
         run: |
-          node <<'EOF'
-          const fs = require("fs");
-          const fetch = require("node-fetch");
+          curl -s \
+            -X GET "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/2025/segments/0/leagues/1085647814?view=mBoxscore&view=mTeam" \
+            -H "Accept: application/json" \
+            -H "Cookie: SWID=${{ secrets.ESPN_SWID }}; espn_s2=${{ secrets.ESPN_S2 }}" \
+            -o espn-response.json
 
-          const SWID = process.env.ESPN_SWID;
-          const ESPN_S2 = process.env.ESPN_S2;
+          echo "Response saved to espn-response.json"
+          head -n 20 espn-response.json
 
-          const url = "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/2025/segments/0/leagues/1085647814?view=mBoxscore&view=mTeam";
-
-          const headers = {
-            "Accept": "application/json",
-            "Cookie": `SWID=${SWID}; espn_s2=${ESPN_S2}`
-          };
-
-          const getTeamDataForResponse = (teams) => {
-            return teams.map((team) => ({
-              id: team.id,
-              name: team.name,
-              totalPoints: team.points,
-              wins: team.record.overall.wins,
-              losses: team.record.overall.losses,
-              ties: team.record.overall.ties,
-            }));
-          };
-
-          const getMatchupDataForResponse = (schedule) => {
-            return schedule.map((matchup) => ({
-              week: matchup.matchupPeriodId,
-              homeId: matchup.home.teamId,
-              awayId: matchup.away.teamId,
-              homeScore: matchup.home.totalPoints,
-              awayScore: matchup.away.totalPoints,
-              winnerId:
-                matchup.home.totalPoints > matchup.away.totalPoints
-                  ? matchup.home.teamId
-                  : matchup.home.totalPoints < matchup.away.totalPoints
-                  ? matchup.away.teamId
-                  : null,
-            }));
-          };
-
-          (async () => {
-            const res = await fetch(url, { headers });
-            if (!res.ok) {
-              throw new Error(`Failed to fetch ESPN API: ${res.statusText}`);
-            }
-            const data = await res.json();
-
-            const teamData = getTeamDataForResponse(data.teams || []);
-            const matchupData = getMatchupDataForResponse(data.schedule || []);
-
-            fs.writeFileSync("teams.json", JSON.stringify(teamData, null, 2));
-            fs.writeFileSync("matchups.json", JSON.stringify(matchupData, null, 2));
-          })().catch((err) => {
-            console.error(err);
-            process.exit(1);
-          });
-          EOF
-        env:
-          ESPN_SWID: ${{ secrets.ESPN_SWID }}
-          ESPN_S2: ${{ secrets.ESPN_S2 }}
-
-      - name: Commit and push JSON
+      - name: Commit and push response file
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add teams.json matchups.json
-          git commit -m "Update fantasy data [skip ci]" || echo "No changes to commit"
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add espn-response.json
+          git commit -m "Update ESPN API response [skip ci]" || echo "No changes to commit"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/LeviGreen/fantasy-playoff-predictor.git
           git push
