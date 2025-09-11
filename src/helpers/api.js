@@ -1,4 +1,4 @@
-import leagueData from './leagueData.json';
+import leagueData from './league-data.json';
 
 export const fetchLeagueData = (setTeams, setMatchups) => {
   // map data to our structure
