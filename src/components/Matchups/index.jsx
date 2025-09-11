@@ -1,17 +1,6 @@
 import { useState } from 'react'
 import './index.css'
 
-const buttonStyles = {
-  color: 'white',
-  padding: '10px 20px',
-  border: 'none',
-  borderRadius: '5px',
-  cursor: 'pointer',
-  margin: '0 10px',
-  width: '180px',
-  height: '60px',
-};
-
 function Matchups({ currentWeek, matchups, setMatchups, teams }) {
 	const [selectedWeek, setSelectedWeek] = useState(currentWeek);
 
@@ -29,32 +18,26 @@ function Matchups({ currentWeek, matchups, setMatchups, teams }) {
 	return (
 	<div>
 		<h2>Matchups</h2>
-		<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0' }}>  
-			<button onClick={() => setSelectedWeek(selectedWeek - 1)} disabled={selectedWeek <= 1}>Previous Week</button>
-			<div style={{ width: '20px' }}></div>
+		<div className='week-selector-container'>  
+			<button onClick={() => setSelectedWeek(selectedWeek - 1)} disabled={selectedWeek <= 1}>&lt; Previous</button>
 			<p>Week {selectedWeek}</p>
-			<div style={{ width: '20px' }}></div>
-			<button onClick={() => setSelectedWeek(selectedWeek + 1)} disabled={selectedWeek >= 14}>Next Week</button>
+			<button onClick={() => setSelectedWeek(selectedWeek + 1)} disabled={selectedWeek >= 14}>Next &gt;</button>
 		</div>
 
 		{ currentMatchups.map((matchup, index) => (
-		<div key={index} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '10px 0', padding: '10px' }}>
+		<div key={index} className='head-to-head-container'>
 			<div className='score-box'  style={{ justifyContent: 'flex-end' }}>{matchup.awayScore}</div>
 			<button
-				style={{
-					backgroundColor: matchup.winnerId == matchup.awayId ? 'green' : 'lightgray',
-					...buttonStyles
-				}}
+				className='team-button'
+				style={{ backgroundColor: matchup.winnerId == matchup.awayId ? 'green' : 'lightgray' }}
 				onClick={() => predictMatchup(matchup, matchup.awayId)}
 			>
 				{teams.find(team => team.id == matchup.awayId)?.name || matchup.awayId}
 			</button>
-			<span style={{ margin: '0 5px' }}>vs</span>
+			<span>vs</span>
 			<button
-				style={{
-					backgroundColor: matchup.winnerId == matchup.homeId ? 'green' : 'lightgray',
-					...buttonStyles
-				}}
+				className='team-button'
+				style={{ backgroundColor: matchup.winnerId == matchup.homeId ? 'green' : 'lightgray' }}
 				onClick={() => predictMatchup(matchup, matchup.homeId)}
 			>
 				{teams.find(team => team.id == matchup.homeId)?.name || matchup.homeId}

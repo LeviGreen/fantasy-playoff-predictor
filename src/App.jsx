@@ -99,7 +99,7 @@ function App() {
 	}, [setTeams, setMatchups, setLeagueName, setCurrentWeek]);
 
 	const onReset = () => {
-		fetchLeagueData(setLeagueName, setCurrentWeek,setTeams, setMatchups);
+		fetchLeagueData(setLeagueName, setCurrentWeek, setTeams, setMatchups);
 	}
 
 	return (
@@ -111,11 +111,9 @@ function App() {
 		</button>
 		<h2>{leagueName}</h2>
 		<h2>2025 Season</h2>
-
 		{teams && matchups && (
 			<div className='matchups-standings-container'>
 				<Matchups currentWeek={currentWeek} matchups={matchups} setMatchups={setMatchups} teams={teams} updateTeamRecords={updateTeamRecords} rankTeams={rankTeams} />
-				<div style={{ width: '20px' }}></div>
 				<Standings rankedTeams={rankedTeams} updateTeamRecords={updateTeamRecords} rankTeams={rankTeams} />
 			</div>
 		)}
