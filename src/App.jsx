@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import { fetchLeagueData } from './helpers/api.ts'
+import { fetchLeagueData } from './helpers/api.js'
 import Matchups from './components/Matchups'
 import Standings from './components/Standings'
 
@@ -94,7 +94,7 @@ function App() {
 
 	const onSubmit = () => {
 		setLeagueId(document.getElementById('input-league-id').value)
-		fetchLeagueData(leagueId, setTeams, setMatchups);
+		fetchLeagueData(setTeams, setMatchups);
 	}
 
 	return (

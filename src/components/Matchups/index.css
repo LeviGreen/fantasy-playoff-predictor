@@ -1,0 +1,6 @@
+.score-box {
+  display: flex;
+  font-weight: bold;
+  font-size: 1em;
+  width: 30px;
+}
