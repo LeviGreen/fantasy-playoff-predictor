@@ -21,16 +21,16 @@ jobs:
             -X GET "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/2025/segments/0/leagues/1085647814?view=mBoxscore&view=mTeam" \
             -H "Accept: application/json" \
             -H "Cookie: SWID=${{ secrets.ESPN_SWID }}; espn_s2={${{ secrets.ESPN_S2 }}}" \
-            -o espn-response.json
+            -o src/helpers/league-data.json
 
-          echo "Response saved to espn-response.json"
-          head -n 20 espn-response.json
+          echo "Response saved to league-data.json"
+          head -n 20 src/helpers/league-data.json
 
       - name: Commit and push response file
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add espn-response.json
+          git add src/helpers/league-data.json
           git commit -m "Update ESPN API response [skip ci]" || echo "No changes to commit"
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/LeviGreen/fantasy-playoff-predictor.git
           git push
