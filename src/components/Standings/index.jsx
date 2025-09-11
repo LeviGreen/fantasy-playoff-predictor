@@ -20,6 +20,9 @@ function Standings({rankedTeams, updateTeamRecords, rankTeams}) {
 	return (
 		<div>
 			<h2>Standings</h2>
+			<br />
+			<br />
+			<br />
 			<table>
 				<thead>
 					<tr>

@@ -38,8 +38,8 @@ function Matchups({ currentWeek, matchups, setMatchups, teams }) {
 		</div>
 
 		{ currentMatchups.map((matchup, index) => (
-		<div key={index} style={{ display: 'flex', alignItems: 'center', margin: '10px 0' }}>
-			<div className='score-box'>{matchup.awayScore}</div>
+		<div key={index} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '10px 0', padding: '10px' }}>
+			<div className='score-box'  style={{ justifyContent: 'flex-end' }}>{matchup.awayScore}</div>
 			<button
 				style={{
 					backgroundColor: matchup.winnerId == matchup.awayId ? 'green' : 'lightgray',
@@ -59,7 +59,7 @@ function Matchups({ currentWeek, matchups, setMatchups, teams }) {
 			>
 				{teams.find(team => team.id == matchup.homeId)?.name || matchup.homeId}
 			</button>
-			<div className='score-box'>{matchup.homeScore}</div>
+			<div className='score-box'  style={{ justifyContent: 'flex-start' }}>{matchup.homeScore}</div>
 		</div>
 
 		))}

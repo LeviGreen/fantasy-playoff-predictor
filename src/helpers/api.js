@@ -1,7 +1,10 @@
 import leagueData from './league-data.json';
+const LEAGUE_NAME = 'Fantersee Furtbull'
 
-export const fetchLeagueData = (setTeams, setMatchups) => {
+export const fetchLeagueData = (setLeagueName, setCurrentWeek,setTeams, setMatchups) => {
   // map data to our structure
+  setLeagueName(LEAGUE_NAME);
+  setCurrentWeek(leagueData.scoringPeriodId);
   setTeams(getTeamDataForResponse(leagueData.teams));
   setMatchups(getMatchupDataForResponse(leagueData.schedule));
 };
