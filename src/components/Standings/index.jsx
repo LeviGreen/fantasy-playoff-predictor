@@ -2,48 +2,40 @@ function Standings({rankedTeams, updateTeamRecords, rankTeams}) {
 	updateTeamRecords();
 	rankTeams();
 
-	const playoffSpots = {
-		1: '1 Seed (Bye)',
-		2: '2 Seed (Bye)',
-		3: '3 Seed',
-		4: '4 Seed',
-		5: '5 Seed',
-		6: '6 Seed',
-		7: 'Out',
-		8: 'Out',
-		9: 'Out',
-		10: 'Out',
-		11: 'Out',
-		12: 'Out',
-	}
+	const headerCellStyle = { padding: '4px 12px 24px 0px', fontSize: '1.17em' };
+	const cellStyle = { padding: '8px 12px' };
 
 	return (
 		<div>
 			<h2>Standings</h2>
-			<br />
-			<br />
-			<br />
+			<br/>
 			<table>
 				<thead>
 					<tr>
-						<th>Rank</th>
-						<th>Team</th>
-						<th>Wins</th>
-						<th>Losses</th>
-						<th>Total Points</th>
-						<th>Playoff Status</th>
+						<th style={headerCellStyle}>Rank</th>
+						<th style={headerCellStyle}>Team</th>
+						<th style={headerCellStyle}>W</th>
+						<th style={headerCellStyle}>L</th>
+						<th style={headerCellStyle}>Points</th>
+						<th style={headerCellStyle}>Playoffs</th>
 
 					</tr>
 				</thead>
 				<tbody>
 					{rankedTeams.map((team, index) => (
 						<tr key={team.id}>
-							<td>{index + 1}</td>
-							<td>{team.name}</td>
-							<td>{team.wins}</td>
-							<td>{team.losses}</td>
-							<td>{team.totalPoints}</td>
-							<td>{playoffSpots[index + 1]}</td>
+							<td style={cellStyle}>{index + 1}</td>
+							<td style={cellStyle}>{team.name}</td>
+							<td style={cellStyle}>{team.wins}</td>
+							<td style={cellStyle}>{team.losses}</td>
+							<td style={cellStyle}>{team.totalPoints}</td>
+							<td>
+								{index < 6 ? (
+									<span style={{ color: 'green', fontSize: '24px' }}>&#10004;</span>
+								) : (
+									<span style={{ color: 'red', fontSize: '24px' }}>&#10008;</span>
+								)}
+							</td>
 						</tr>
 					))}
 				</tbody>
