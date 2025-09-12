@@ -1,0 +1,16 @@
+.button-matchup {
+  color: black;
+  border: none;
+  border-radius: 0.9em;
+  border: 5px solid black;
+  cursor: pointer;
+  width: 180px;
+  height: 60px;
+}
+.button-matchup:hover {
+  background-color: white;
+}
+
+.button-matchup:active {
+  border: 8px solid black;
+}

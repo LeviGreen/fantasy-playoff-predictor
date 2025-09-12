@@ -43,8 +43,6 @@ function App() {
 		const teamRecords = teams.sort((team1, team2) => {
 			const headToHead = getHeadToHead(team1, team2);
 
-			console.log(headToHead)
-
 			if (team1.wins !== team2.wins) {
 				return team2.wins - team1.wins;
 			} else if (headToHead.team1Wins + headToHead.team2Wins === 0) {
@@ -105,8 +103,8 @@ function App() {
 	return (
 	<div>
 		<h1>Fantasy Playoff Predictor</h1>
-		<div className="card">
-		<button onClick={onReset}>
+		<div className='card'>
+		<button className='button-reset' onClick={onReset}>
 			Reset to Current League Data
 		</button>
 		<h2>{leagueName}</h2>
