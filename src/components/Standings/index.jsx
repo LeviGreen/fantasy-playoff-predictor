@@ -1,43 +1,66 @@
+import styled from 'styled-components';
+
 function Standings({rankedTeams, updateTeamRecords, rankTeams}) {
+	const Table = styled.table`
+		border-collapse: collapse;
+
+		th {
+			padding: 8px 12px;		}
+		td {
+			padding: 2px 12px;
+			text-align: center;
+		}
+
+		thead {
+			font-weight: bold;
+			background-color: #333333;
+
+			text-align: center;
+		}
+
+		tbody tr:nth-child(odd) {
+			background-color: #404040;
+		}
+		tbody tr:nth-child(even) {
+			background-color: #333333;
+		}
+	`;
+
 	updateTeamRecords();
 	rankTeams();
-
-	const headerCellStyle = { padding: '4px 12px 24px 0px', fontSize: '1.17em' };
-	const cellStyle = { padding: '8px 12px' };
 
 	return (
 		<div>
 			<h2>Standings</h2>
-			<br/>
-			<table>
+			<br />
+			<Table>
 				<thead>
 					<tr>
-						<th style={headerCellStyle}>Rank</th>
-						<th style={headerCellStyle}>Team</th>
-						<th style={headerCellStyle}>Record</th>
-						<th style={headerCellStyle}>Points</th>
-						<th style={headerCellStyle}>Playoffs</th>
-
+						<th>#</th>
+						<th>Team</th>
+						<th>Record</th>
+						<th>Points</th>
+						<th>Playoffs</th>
 					</tr>
 				</thead>
 				<tbody>
 					{rankedTeams.map((team, index) => (
 						<tr key={team.id}>
-							<td style={cellStyle}>{index + 1}</td>
-							<td style={cellStyle}>{team.name}</td>
-							<td style={cellStyle}>{team.wins}-{team.losses}-{team.ties}</td>
-							<td style={cellStyle}>{team.totalPoints}</td>
+							<td>{index + 1}</td>
+							<td>{team.name}</td>
+							<td>{team.wins}-{team.losses}-{team.ties}</td>
+							<td>{team.totalPoints}</td>
 							<td>
 								{index < 6 ? (
-									<span style={{ color: 'green', fontSize: '24px' }}>&#10004;</span>
+									<span style={{ color: 'green', fontSize: '24px' }}>&#x2705;</span>
 								) : (
-									<span style={{ color: 'red', fontSize: '24px' }}>&#10008;</span>
+									<span style={{ color: 'red', fontSize: '24px' }}>&#10060;</span>
 								)}
 							</td>
 						</tr>
 					))}
 				</tbody>
-			</table>
+			</Table>
 		</div>
 	);
 }

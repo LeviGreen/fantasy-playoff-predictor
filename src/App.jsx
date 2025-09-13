@@ -113,17 +113,17 @@ function App() {
 	return (
 	<div>
 		<h1>Fantasy Playoff Predictor</h1>
-		<div className='card'>
-		<button className='button-reset' onClick={onReset}>
-			Reset to Current League Data
-		</button>
-		<h2>{leagueName} - 2025 Season</h2>
-		{teams && matchups && (
-			<div className='matchups-standings-container'>
-				<Matchups currentWeek={currentWeek} matchups={matchups} setMatchups={setMatchups} teams={teams} updateTeamRecords={updateTeamRecords} rankTeams={rankTeams} />
-				<Standings rankedTeams={rankedTeams} updateTeamRecords={updateTeamRecords} rankTeams={rankTeams} />
-			</div>
-		)}
+		<div>
+			<button className='button-reset' onClick={onReset}>
+				Reset to Current League Data
+			</button>
+			<h2>{leagueName} - 2025 Season</h2>
+			{teams && matchups && (
+				<div className='matchups-standings-container'>
+					<Matchups currentWeek={currentWeek} matchups={matchups} setMatchups={setMatchups} teams={teams} updateTeamRecords={updateTeamRecords} rankTeams={rankTeams} />
+					<Standings rankedTeams={rankedTeams} updateTeamRecords={updateTeamRecords} rankTeams={rankTeams} />
+				</div>
+			)}
 		</div>
 	</div>
 	)
