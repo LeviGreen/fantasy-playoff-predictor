@@ -12,39 +12,43 @@ function App() {
 	const [rankedTeams, setRankedTeams] = useState([]);
 
 	const updateTeamRecords = () => {
-	//reset team records
-	teams.forEach(team => {
-		team.wins = 0;
-		team.losses = 0;
-		team.totalPoints = 0;
-	});
+		//reset team records
+		teams.forEach(team => {
+			team.wins = 0;
+			team.losses = 0;
+			team.ties = 0;
+			team.totalPoints = 0;
+		});
 
-	//update team records based on matchups
-	matchups.forEach(matchup => {
-		const homeTeam = teams.find(team => team.id === matchup.homeId);
-		const awayTeam = teams.find(team => team.id === matchup.awayId);
+		//update team records based on matchups
+		matchups.forEach(matchup => {
+			const homeTeam = teams.find(team => team.id === matchup.homeId);
+			const awayTeam = teams.find(team => team.id === matchup.awayId);
 
-		if (homeTeam && awayTeam) {
-			homeTeam.totalPoints += matchup.homeScore;
-			awayTeam.totalPoints += matchup.awayScore;
+			if (homeTeam && awayTeam) {
+				homeTeam.totalPoints += matchup.homeScore;
+				awayTeam.totalPoints += matchup.awayScore;
 
-			if (matchup.winnerId === homeTeam.id) {
-				homeTeam.wins += 1;
-				awayTeam.losses += 1;
-			} else if (matchup.winnerId === awayTeam.id) {
-				awayTeam.wins += 1;
-				homeTeam.losses += 1;
+				if (matchup.winnerId === homeTeam.id) {
+					homeTeam.wins += 1;
+					awayTeam.losses += 1;
+				} else if (matchup.winnerId === awayTeam.id) {
+					awayTeam.wins += 1;
+					homeTeam.losses += 1;
+				} else if (matchup.winnerId === 'tie') {
+					homeTeam.ties += 1;
+					awayTeam.ties += 1;
+				}
 			}
-		}
-	});
+		});
 	}
 
 	const rankTeams = () => {
 		const teamRecords = teams.sort((team1, team2) => {
 			const headToHead = getHeadToHead(team1, team2);
 
-			if (team1.wins !== team2.wins) {
-				return team2.wins - team1.wins;
+			if (team1.wins + (team1.ties / 2) !== team2.wins + (team2.ties / 2)) {
+				return (team2.wins + (team2.ties / 2)) - (team1.wins + (team1.ties / 2));
 			} else if (headToHead.team1Wins + headToHead.team2Wins === 0) {
 				return team2.totalPoints - team1.totalPoints;
 			} else if (headToHead.team1Wins !== headToHead.team2Wins) {
@@ -76,6 +80,9 @@ function App() {
 					headToHead.team1Wins += 1;
 				} else if (matchup.winnerId === team2.id) {
 					headToHead.team2Wins += 1;
+				} else if (matchup.winnerId === 'tie') {
+					headToHead.team1Wins += 0.5;
+					headToHead.team2Wins += 0.5;
 				}
 			} else if (matchup.homeId === team2.id && matchup.awayId === team1.id) {
 				headToHead.timesPlayed += 1;
@@ -85,6 +92,9 @@ function App() {
 					headToHead.team2Wins += 1;
 				} else if (matchup.winnerId === team1.id) {
 					headToHead.team1Wins += 1;
+				} else if (matchup.winnerId === 'tie') {
+					headToHead.team1Wins += 0.5;
+					headToHead.team2Wins += 0.5;
 				}
 			}
 		});
@@ -107,8 +117,7 @@ function App() {
 		<button className='button-reset' onClick={onReset}>
 			Reset to Current League Data
 		</button>
-		<h2>{leagueName}</h2>
-		<h2>2025 Season</h2>
+		<h2>{leagueName} - 2025 Season</h2>
 		{teams && matchups && (
 			<div className='matchups-standings-container'>
 				<Matchups currentWeek={currentWeek} matchups={matchups} setMatchups={setMatchups} teams={teams} updateTeamRecords={updateTeamRecords} rankTeams={rankTeams} />

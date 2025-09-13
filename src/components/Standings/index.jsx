@@ -14,8 +14,7 @@ function Standings({rankedTeams, updateTeamRecords, rankTeams}) {
 					<tr>
 						<th style={headerCellStyle}>Rank</th>
 						<th style={headerCellStyle}>Team</th>
-						<th style={headerCellStyle}>W</th>
-						<th style={headerCellStyle}>L</th>
+						<th style={headerCellStyle}>Record</th>
 						<th style={headerCellStyle}>Points</th>
 						<th style={headerCellStyle}>Playoffs</th>
 
@@ -26,8 +25,7 @@ function Standings({rankedTeams, updateTeamRecords, rankTeams}) {
 						<tr key={team.id}>
 							<td style={cellStyle}>{index + 1}</td>
 							<td style={cellStyle}>{team.name}</td>
-							<td style={cellStyle}>{team.wins}</td>
-							<td style={cellStyle}>{team.losses}</td>
+							<td style={cellStyle}>{team.wins}-{team.losses}-{team.ties}</td>
 							<td style={cellStyle}>{team.totalPoints}</td>
 							<td>
 								{index < 6 ? (

@@ -3,6 +3,7 @@ import './index.css'
 import BackButton from '../BackButton';
 import ForwardButton from '../ForwardButton';
 import MatchupButton from '../MatchupButton';
+import TieButton from '../TieButton';
 
 const matchupSelectedStyles = {
 	backgroundColor: 'green',
@@ -48,7 +49,10 @@ function Matchups({ currentWeek, matchups, setMatchups, teams }) {
 				>
 					{teams.find(team => team.id == matchup.awayId)?.name || matchup.awayId}
 				</MatchupButton>
-				<span>vs</span>
+				<TieButton
+					style={matchup.winnerId == 'tie' ? matchupSelectedStyles : matchupUnselectedStyles}
+					onClick={() => predictMatchup(matchup, 'tie')}
+				/>
 				<MatchupButton
 					style={matchup.winnerId == matchup.homeId ? matchupSelectedStyles : matchupUnselectedStyles}
 					onClick={() => predictMatchup(matchup, matchup.homeId)}

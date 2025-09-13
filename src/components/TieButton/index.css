@@ -1,0 +1,16 @@
+.button-tie {
+  color: black;
+  border: none;
+  border-radius: 1.4em;
+  border: 5px solid black;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+}
+.button-tie:hover {
+  background-color: white;
+}
+
+.button-tie:active {
+  border: 6px solid black;
+}

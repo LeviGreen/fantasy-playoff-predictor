@@ -4,7 +4,7 @@ const LEAGUE_NAME = 'Fantersee Furtbull'
 export const fetchLeagueData = (setLeagueName, setCurrentWeek,setTeams, setMatchups) => {
   // map data to our structure
   setLeagueName(LEAGUE_NAME);
-  setCurrentWeek(leagueData.scoringPeriodId);
+  setCurrentWeek(leagueData.scoringPeriodId - 1);
   setTeams(getTeamDataForResponse(leagueData.teams));
   setMatchups(getMatchupDataForResponse(leagueData.schedule));
 };
@@ -29,8 +29,20 @@ const getMatchupDataForResponse = (schedule) => {
     awayId: matchup.away.teamId,
     homeScore: matchup.home.totalPoints,
     awayScore: matchup.away.totalPoints,
-    winnerId: matchup.home.totalPoints > matchup.away.totalPoints ? matchup.home.teamId : (matchup.home.totalPoints < matchup.away.totalPoints ? matchup.away.teamId : null),
+    winnerId: determineWinner(matchup),
   }));
 
   return matchupData;
+};
+
+const determineWinner = (matchup) => {
+  if (matchup.home.totalPoints > matchup.away.totalPoints) {
+    return matchup.home.teamId;
+  } else if (matchup.home.totalPoints < matchup.away.totalPoints) {
+    return matchup.away.teamId;
+  } else if (matchup.home.totalPoints === matchup.away.totalPoints && matchup.home.totalPoints !== 0) {
+    return 'tie';
+  } else {
+    return null;
+  }
 };
