@@ -2,7 +2,7 @@ name: Update Fantasy Data
 
 on:
   schedule:
-    - cron: "0 6 * * 2" # 6:00 AM every Tuesday (UTC)
+    - cron: "0 11 * * 2" # 6:00 AM EST (11:00 UTC)
   workflow_dispatch: # still allow manual runs
 
 jobs:
@@ -13,7 +13,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-            token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Call ESPN API and save filtered response
         run: |
@@ -34,3 +34,9 @@ jobs:
           git commit -m "Update ESPN API response [skip ci]" || echo "No changes to commit"
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/LeviGreen/fantasy-playoff-predictor.git
           git push
+
+      - name: Deploy latest code
+        run: |
+          npm install
+          npm run build
+          npm run deploy
