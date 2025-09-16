@@ -103,7 +103,7 @@ function App() {
 
 	// run fetch league data on initial load
 	useEffect(() => {
-		fetchLeagueData(setLeagueName, setCurrentWeek,setTeams, setMatchups);
+		fetchLeagueData(setLeagueName, setCurrentWeek, setTeams, setMatchups);
 	}, [setTeams, setMatchups, setLeagueName, setCurrentWeek]);
 
 	const onReset = () => {

@@ -49,7 +49,7 @@ function Standings({rankedTeams, updateTeamRecords, rankTeams}) {
 							<td>{index + 1}</td>
 							<td>{team.name}</td>
 							<td>{team.wins}-{team.losses}-{team.ties}</td>
-							<td>{team.totalPoints}</td>
+							<td>{team.totalPoints.toFixed(2)}</td>
 							<td>
 								{index < 6 ? (
 									<span style={{ color: 'green', fontSize: '24px' }}>&#x2705;</span>
