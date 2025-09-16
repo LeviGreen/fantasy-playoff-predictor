@@ -17563,7 +17563,7 @@
               }
             },
             {
-              "lineupSlotId": 0,
+              "lineupSlotId": 21,
               "playerId": 3915511,
               "playerPoolEntry": {
                 "appliedStatTotal": 0.0,
@@ -18542,7 +18542,7 @@
               }
             },
             {
-              "lineupSlotId": 20,
+              "lineupSlotId": 0,
               "playerId": 3917792,
               "playerPoolEntry": {
                 "appliedStatTotal": 0.0,
@@ -28196,8 +28196,8 @@
           "2": 2
         },
         "misc": 0,
-        "moveToActive": 3,
-        "moveToIR": 0,
+        "moveToActive": 5,
+        "moveToIR": 2,
         "paid": 0.0,
         "teamCharges": 0.0,
         "trades": 0
@@ -28807,6 +28807,61 @@
       "owners": [
         "{BA30DB82-F936-47A5-A2F3-30C6586F8FEB}"
       ],
+      "pendingTransactions": [
+        {
+          "bidAmount": 0,
+          "executionType": "EXECUTE",
+          "expirationDate": 1758201107696,
+          "id": "5035d708-36a4-4758-9029-5789b2c19d1e",
+          "isActingAsTeamOwner": false,
+          "isLeagueManager": false,
+          "isPending": true,
+          "items": [
+            {
+              "fromLineupSlotId": 20,
+              "fromTeamId": 9,
+              "isKeeper": false,
+              "overallPickNumber": 0,
+              "playerId": 3046779,
+              "toLineupSlotId": -1,
+              "toTeamId": 10,
+              "type": "TRADE"
+            },
+            {
+              "fromLineupSlotId": 2,
+              "fromTeamId": 10,
+              "isKeeper": false,
+              "overallPickNumber": 0,
+              "playerId": 4047365,
+              "toLineupSlotId": -1,
+              "toTeamId": 9,
+              "type": "TRADE"
+            },
+            {
+              "fromLineupSlotId": 2,
+              "fromTeamId": 9,
+              "isKeeper": false,
+              "overallPickNumber": 0,
+              "playerId": 4567048,
+              "toLineupSlotId": -1,
+              "toTeamId": 10,
+              "type": "TRADE"
+            }
+          ],
+          "memberId": "{BA30DB82-F936-47A5-A2F3-30C6586F8FEB}",
+          "proposedDate": 1758028307666,
+          "rating": 0,
+          "scoringPeriodId": 3,
+          "skipTransactionCounters": false,
+          "status": "PENDING",
+          "subOrder": 0,
+          "teamActions": {
+            "9": "ACCEPTED"
+          },
+          "teamId": 9,
+          "type": "TRADE_PROPOSAL"
+        }
+      ],
       "playoffSeed": 5,
       "points": 227.68,
       "pointsAdjusted": 0.0,
@@ -28948,6 +29003,61 @@
       "name": "Aaron Poggers",
       "owners": [
         "{D5D6EC5D-E4D6-44E2-9635-0AF8F9300B74}"
+      ],
+      "pendingTransactions": [
+        {
+          "bidAmount": 0,
+          "executionType": "EXECUTE",
+          "expirationDate": 1758201107696,
+          "id": "5035d708-36a4-4758-9029-5789b2c19d1e",
+          "isActingAsTeamOwner": false,
+          "isLeagueManager": false,
+          "isPending": true,
+          "items": [
+            {
+              "fromLineupSlotId": 20,
+              "fromTeamId": 9,
+              "isKeeper": false,
+              "overallPickNumber": 0,
+              "playerId": 3046779,
+              "toLineupSlotId": -1,
+              "toTeamId": 10,
+              "type": "TRADE"
+            },
+            {
+              "fromLineupSlotId": 2,
+              "fromTeamId": 10,
+              "isKeeper": false,
+              "overallPickNumber": 0,
+              "playerId": 4047365,
+              "toLineupSlotId": -1,
+              "toTeamId": 9,
+              "type": "TRADE"
+            },
+            {
+              "fromLineupSlotId": 2,
+              "fromTeamId": 9,
+              "isKeeper": false,
+              "overallPickNumber": 0,
+              "playerId": 4567048,
+              "toLineupSlotId": -1,
+              "toTeamId": 10,
+              "type": "TRADE"
+            }
+          ],
+          "memberId": "{BA30DB82-F936-47A5-A2F3-30C6586F8FEB}",
+          "proposedDate": 1758028307666,
+          "rating": 0,
+          "scoringPeriodId": 3,
+          "skipTransactionCounters": false,
+          "status": "PENDING",
+          "subOrder": 0,
+          "teamActions": {
+            "9": "ACCEPTED"
+          },
+          "teamId": 9,
+          "type": "TRADE_PROPOSAL"
+        }
       ],
       "playoffSeed": 7,
       "points": 213.57999999999998,
