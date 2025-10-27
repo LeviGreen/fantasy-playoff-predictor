@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write  # needed for push + deploy
+  contents: write
 
 jobs:
   fetch:
@@ -45,15 +45,10 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22 # ✅ use Node 22+ for Vite 5 compatibility
 
       - run: npm ci --ignore-scripts
-      - run: npm run build -- --chunkSizeWarningLimit=1000
-
-      - name: Deploy to GitHub Pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          npx gh-pages -d dist -u "github-actions-bot <github-actions[bot]@users.noreply.github.com>" -r "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git"
+      - run: npm run build # ✅ no CLI flag; configure chunk
