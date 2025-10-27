@@ -6,11 +6,12 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: write  # needed for push + deploy
 
 jobs:
   fetch:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
@@ -28,6 +29,8 @@ jobs:
           jq type src/helpers/league-data.json >/dev/null
 
       - name: Commit and push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -39,12 +42,18 @@ jobs:
     needs: fetch
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 18
+
       - run: npm ci --ignore-scripts
-      - run: npm run build
-      - run: npm run deploy
+      - run: npm run build -- --chunkSizeWarningLimit=1000
+
+      - name: Deploy to GitHub Pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npx gh-pages -d dist -u "github-actions-bot <github-actions[bot]@users.noreply.github.com>" -r "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git"
