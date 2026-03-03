@@ -65620,7 +65620,7 @@
                   "fullName": "David Montgomery",
                   "id": 4035538,
                   "lastName": "Montgomery",
-                  "proTeamId": 8,
+                  "proTeamId": 34,
                   "stats": [
                     {
                       "appliedStats": {
@@ -65662,7 +65662,7 @@
                       }
                     }
                   ],
-                  "universeId": 2
+                  "universeId": 1
                 }
               }
             },
