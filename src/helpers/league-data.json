@@ -57093,7 +57093,7 @@
                   "fullName": "Michael Pittman Jr.",
                   "id": 4035687,
                   "lastName": "Pittman Jr.",
-                  "proTeamId": 11,
+                  "proTeamId": 23,
                   "stats": [
                     {
                       "appliedStats": {
@@ -59098,7 +59098,7 @@
                   "fullName": "Mike Evans",
                   "id": 16737,
                   "lastName": "Evans",
-                  "proTeamId": 27,
+                  "proTeamId": 25,
                   "stats": [
                     {
                       "appliedStats": {
@@ -61588,7 +61588,7 @@
                   "fullName": "Travis Etienne Jr.",
                   "id": 4239996,
                   "lastName": "Etienne Jr.",
-                  "proTeamId": 30,
+                  "proTeamId": 18,
                   "stats": [
                     {
                       "appliedStats": {
@@ -61631,7 +61631,7 @@
                       }
                     }
                   ],
-                  "universeId": 1
+                  "universeId": 2
                 }
               }
             },
@@ -64135,7 +64135,7 @@
                   "fullName": "DJ Moore",
                   "id": 3915416,
                   "lastName": "Moore",
-                  "proTeamId": 3,
+                  "proTeamId": 2,
                   "stats": [
                     {
                       "appliedStats": {
@@ -64165,7 +64165,7 @@
                       }
                     }
                   ],
-                  "universeId": 2
+                  "universeId": 1
                 }
               }
             },
@@ -66596,7 +66596,7 @@
                   "fullName": "Kenneth Gainwell",
                   "id": 4371733,
                   "lastName": "Gainwell",
-                  "proTeamId": 23,
+                  "proTeamId": 27,
                   "stats": [
                     {
                       "appliedStats": {
@@ -66649,7 +66649,7 @@
                       }
                     }
                   ],
-                  "universeId": 1
+                  "universeId": 2
                 }
               }
             },
@@ -66805,7 +66805,7 @@
                   "fullName": "Kenneth Walker III",
                   "id": 4567048,
                   "lastName": "Walker III",
-                  "proTeamId": 26,
+                  "proTeamId": 12,
                   "stats": [
                     {
                       "appliedStats": {
@@ -66852,7 +66852,7 @@
                       }
                     }
                   ],
-                  "universeId": 2
+                  "universeId": 1
                 }
               }
             },
