@@ -65920,7 +65920,7 @@
                   "fullName": "Stefon Diggs",
                   "id": 2976212,
                   "lastName": "Diggs",
-                  "proTeamId": 17,
+                  "proTeamId": 0,
                   "stats": [
                     {
                       "appliedStats": {
@@ -65960,7 +65960,7 @@
                       }
                     }
                   ],
-                  "universeId": 1
+                  "universeId": 0
                 }
               }
             }
