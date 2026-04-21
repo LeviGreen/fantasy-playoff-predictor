@@ -57093,7 +57093,7 @@
                   "fullName": "Michael Pittman Jr.",
                   "id": 4035687,
                   "lastName": "Pittman Jr.",
-                  "proTeamId": 23,
+                  "proTeamId": 11,
                   "stats": [
                     {
                       "appliedStats": {
@@ -59098,7 +59098,7 @@
                   "fullName": "Mike Evans",
                   "id": 16737,
                   "lastName": "Evans",
-                  "proTeamId": 25,
+                  "proTeamId": 27,
                   "stats": [
                     {
                       "appliedStats": {
@@ -61588,7 +61588,7 @@
                   "fullName": "Travis Etienne Jr.",
                   "id": 4239996,
                   "lastName": "Etienne Jr.",
-                  "proTeamId": 18,
+                  "proTeamId": 30,
                   "stats": [
                     {
                       "appliedStats": {
@@ -61631,7 +61631,7 @@
                       }
                     }
                   ],
-                  "universeId": 2
+                  "universeId": 1
                 }
               }
             },
@@ -64135,7 +64135,7 @@
                   "fullName": "DJ Moore",
                   "id": 3915416,
                   "lastName": "Moore",
-                  "proTeamId": 2,
+                  "proTeamId": 3,
                   "stats": [
                     {
                       "appliedStats": {
@@ -64165,7 +64165,7 @@
                       }
                     }
                   ],
-                  "universeId": 1
+                  "universeId": 2
                 }
               }
             },
@@ -65920,7 +65920,7 @@
                   "fullName": "Stefon Diggs",
                   "id": 2976212,
                   "lastName": "Diggs",
-                  "proTeamId": 0,
+                  "proTeamId": 17,
                   "stats": [
                     {
                       "appliedStats": {
@@ -65960,7 +65960,7 @@
                       }
                     }
                   ],
-                  "universeId": 0
+                  "universeId": 1
                 }
               }
             }
@@ -66596,7 +66596,7 @@
                   "fullName": "Kenneth Gainwell",
                   "id": 4371733,
                   "lastName": "Gainwell",
-                  "proTeamId": 27,
+                  "proTeamId": 23,
                   "stats": [
                     {
                       "appliedStats": {
@@ -66649,7 +66649,7 @@
                       }
                     }
                   ],
-                  "universeId": 2
+                  "universeId": 1
                 }
               }
             },
@@ -66805,7 +66805,7 @@
                   "fullName": "Kenneth Walker III",
                   "id": 4567048,
                   "lastName": "Walker III",
-                  "proTeamId": 12,
+                  "proTeamId": 26,
                   "stats": [
                     {
                       "appliedStats": {
@@ -66852,7 +66852,7 @@
                       }
                     }
                   ],
-                  "universeId": 1
+                  "universeId": 2
                 }
               }
             },
